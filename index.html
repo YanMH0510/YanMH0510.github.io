@@ -7,21 +7,17 @@
 
   <style>
     :root {
-      --bg: #070b16;
-      --bg-2: #0b1020;
-      --card: rgba(255, 255, 255, 0.075);
-      --card-strong: rgba(255, 255, 255, 0.12);
-      --line: rgba(255, 255, 255, 0.13);
-      --text: #f5f7fb;
-      --muted: #a8b3cf;
-      --muted-2: #7d89a8;
-      --blue: #5b8cff;
-      --cyan: #23d3ee;
-      --purple: #9b5cff;
-      --green: #6ee7b7;
-      --warning: #facc15;
-      --shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
-      --radius: 26px;
+      --bg-main: #f7f4ef;
+      --bg-soft: #efe7df;
+      --bg-deep: #e6ddd4;
+      --text-main: #2e2a26;
+      --text-sub: #6f655c;
+      --line: #d8cdc3;
+      --accent: #8b6f62;
+      --accent-dark: #6f564b;
+      --white: #ffffff;
+      --max-width: 1120px;
+      --radius: 18px;
     }
 
     * {
@@ -34,28 +30,11 @@
 
     body {
       margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", "PingFang SC", sans-serif;
-      background:
-        radial-gradient(circle at 15% 10%, rgba(91, 140, 255, 0.28), transparent 34%),
-        radial-gradient(circle at 85% 20%, rgba(155, 92, 255, 0.23), transparent 32%),
-        radial-gradient(circle at 50% 95%, rgba(35, 211, 238, 0.13), transparent 38%),
-        var(--bg);
-      color: var(--text);
-      line-height: 1.75;
-      overflow-x: hidden;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      background-image:
-        linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
-      background-size: 42px 42px;
-      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.75), transparent 75%);
-      z-index: -1;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+        "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      color: var(--text-main);
+      background: var(--bg-main);
+      line-height: 1.8;
     }
 
     a {
@@ -63,8 +42,13 @@
       text-decoration: none;
     }
 
-    .page {
-      width: min(1180px, calc(100% - 40px));
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(var(--max-width), calc(100% - 40px));
       margin: 0 auto;
     }
 
@@ -72,14 +56,12 @@
       position: sticky;
       top: 0;
       z-index: 20;
-      backdrop-filter: blur(18px);
-      background: rgba(7, 11, 22, 0.72);
-      border-bottom: 1px solid var(--line);
+      background: rgba(247, 244, 239, 0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(216, 205, 195, 0.7);
     }
 
     .nav-inner {
-      width: min(1180px, calc(100% - 40px));
-      margin: 0 auto;
       height: 72px;
       display: flex;
       align-items: center;
@@ -88,405 +70,193 @@
     }
 
     .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-weight: 800;
+      font-size: 20px;
+      font-weight: 700;
       letter-spacing: 0.5px;
     }
 
-    .brand-mark {
-      width: 36px;
-      height: 36px;
-      border-radius: 12px;
-      background:
-        linear-gradient(135deg, rgba(91,140,255,0.95), rgba(155,92,255,0.9)),
-        #111827;
-      display: grid;
-      place-items: center;
-      box-shadow: 0 0 28px rgba(91, 140, 255, 0.45);
-      font-size: 17px;
+    .brand small {
+      display: block;
+      font-size: 12px;
+      color: var(--text-sub);
+      font-weight: 500;
+      letter-spacing: 0;
     }
 
     .nav-links {
       display: flex;
-      align-items: center;
-      gap: 4px;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .nav-links a {
-      padding: 9px 13px;
-      border-radius: 999px;
-      transition: 0.2s ease;
+      gap: 24px;
+      font-size: 15px;
+      color: var(--text-sub);
     }
 
     .nav-links a:hover {
-      color: var(--text);
-      background: rgba(255,255,255,0.08);
-    }
-
-    .nav-cta {
-      color: white !important;
-      background: linear-gradient(135deg, var(--blue), var(--purple)) !important;
-      box-shadow: 0 12px 30px rgba(91, 140, 255, 0.25);
+      color: var(--accent-dark);
     }
 
     .hero {
-      min-height: calc(100vh - 72px);
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      align-items: center;
-      gap: 46px;
-      padding: 72px 0 88px;
+      min-height: 88vh;
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      background-image:
+        linear-gradient(to right, rgba(28, 24, 21, 0.64), rgba(28, 24, 21, 0.16)),
+        url("images/hero-bg.jpg");
+      background-size: cover;
+      background-position: center center;
+      color: #fff;
     }
 
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 7px 12px;
-      border: 1px solid var(--line);
+    .hero-content {
+      width: min(var(--max-width), calc(100% - 40px));
+      margin: 0 auto;
+      padding: 0 0 72px;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      padding: 8px 14px;
+      border: 1px solid rgba(255,255,255,0.35);
       border-radius: 999px;
-      background: rgba(255,255,255,0.06);
-      color: var(--muted);
       font-size: 13px;
-      margin-bottom: 28px;
-    }
-
-    .dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--green);
-      box-shadow: 0 0 18px var(--green);
+      margin-bottom: 20px;
+      background: rgba(255,255,255,0.08);
     }
 
     .hero h1 {
       margin: 0;
-      font-size: clamp(48px, 7vw, 88px);
-      line-height: 1.05;
-      letter-spacing: -3px;
-    }
-
-    .gradient-text {
-      background: linear-gradient(135deg, #fff 5%, #a8c7ff 45%, #c4a5ff 80%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    .hero-subtitle {
-      margin: 26px 0 0;
-      max-width: 720px;
-      color: var(--muted);
-      font-size: 19px;
-    }
-
-    .hero-subtitle strong {
-      color: #fff;
+      font-size: clamp(42px, 7vw, 76px);
+      line-height: 1.08;
       font-weight: 700;
+      letter-spacing: -1px;
+      max-width: 760px;
     }
 
-    .hero-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 30px;
+    .hero p {
+      max-width: 640px;
+      margin: 22px 0 0;
+      font-size: 18px;
+      color: rgba(255,255,255,0.88);
     }
 
-    .tag {
-      padding: 8px 13px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.075);
-      border: 1px solid var(--line);
-      color: #dfe6ff;
-      font-size: 14px;
-    }
-
-    .hero-actions {
+    .hero-buttons {
       display: flex;
       flex-wrap: wrap;
       gap: 14px;
-      margin-top: 38px;
+      margin-top: 32px;
     }
 
     .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 13px 18px;
-      min-height: 48px;
-      border-radius: 14px;
-      font-weight: 700;
+      display: inline-block;
+      padding: 12px 22px;
+      border-radius: 999px;
+      font-size: 15px;
+      font-weight: 600;
       transition: 0.2s ease;
-      border: 1px solid transparent;
     }
 
     .btn-primary {
-      background: linear-gradient(135deg, var(--blue), var(--purple));
-      color: white;
-      box-shadow: 0 18px 38px rgba(91, 140, 255, 0.28);
+      background: #ffffff;
+      color: #2d2621;
     }
 
-    .btn-ghost {
-      background: rgba(255,255,255,0.07);
-      border-color: var(--line);
-      color: #e6ecff;
+    .btn-secondary {
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.32);
     }
 
     .btn:hover {
-      transform: translateY(-2px);
+      transform: translateY(-1px);
     }
 
-    .hero-panel {
-      position: relative;
-      min-height: 520px;
-      display: grid;
-      place-items: center;
+    .section {
+      padding: 84px 0;
     }
 
-    .orbit-card {
-      width: min(440px, 100%);
-      border-radius: 34px;
-      padding: 28px;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.14), rgba(255,255,255,0.055)),
-        rgba(255,255,255,0.06);
-      border: 1px solid var(--line);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(22px);
-      position: relative;
-      overflow: hidden;
+    .section-light {
+      background: var(--bg-main);
     }
 
-    .orbit-card::before {
-      content: "";
-      position: absolute;
-      inset: -2px;
-      background: radial-gradient(circle at 20% 0%, rgba(35,211,238,0.28), transparent 32%),
-                  radial-gradient(circle at 90% 20%, rgba(155,92,255,0.24), transparent 34%);
-      z-index: -1;
+    .section-soft {
+      background: var(--bg-soft);
     }
 
-    .archive-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 28px;
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .status {
-      display: flex;
-      gap: 7px;
-    }
-
-    .status span {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.28);
-    }
-
-    .status span:nth-child(1) {
-      background: #ff5f57;
-    }
-
-    .status span:nth-child(2) {
-      background: #febc2e;
-    }
-
-    .status span:nth-child(3) {
-      background: #28c840;
-    }
-
-    .profile-name {
-      font-size: 34px;
-      margin: 0;
-      letter-spacing: -1px;
-    }
-
-    .profile-role {
-      margin-top: 8px;
-      color: var(--cyan);
-      font-weight: 700;
-    }
-
-    .profile-desc {
-      color: var(--muted);
-      margin: 20px 0 26px;
-    }
-
-    .metric-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-    }
-
-    .metric {
-      padding: 16px;
-      border-radius: 18px;
-      background: rgba(255,255,255,0.07);
-      border: 1px solid rgba(255,255,255,0.1);
-    }
-
-    .metric strong {
-      display: block;
-      font-size: 24px;
-      line-height: 1;
-      color: #fff;
-    }
-
-    .metric span {
-      display: block;
-      margin-top: 8px;
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .floating-note {
-      position: absolute;
-      right: -10px;
-      bottom: 48px;
-      width: 210px;
-      padding: 14px 16px;
-      border-radius: 18px;
-      background: rgba(7, 11, 22, 0.72);
-      border: 1px solid var(--line);
-      box-shadow: var(--shadow);
-      color: var(--muted);
-      font-size: 13px;
-      backdrop-filter: blur(16px);
-    }
-
-    .floating-note b {
-      color: white;
-    }
-
-    section {
-      padding: 76px 0;
+    .section-deep {
+      background: var(--bg-deep);
     }
 
     .section-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      gap: 28px;
-      margin-bottom: 28px;
+      margin-bottom: 36px;
     }
 
     .section-kicker {
-      color: var(--cyan);
       font-size: 13px;
-      font-weight: 800;
       letter-spacing: 1.5px;
-      margin-bottom: 10px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
     }
 
     .section-title {
       margin: 0;
-      font-size: clamp(30px, 4vw, 48px);
-      line-height: 1.15;
-      letter-spacing: -1.5px;
+      font-size: clamp(28px, 4vw, 42px);
+      line-height: 1.2;
+      font-weight: 700;
     }
 
-    .section-note {
-      max-width: 420px;
-      color: var(--muted);
-      margin: 0;
-      font-size: 15px;
+    .section-desc {
+      margin-top: 14px;
+      max-width: 760px;
+      color: var(--text-sub);
+      font-size: 16px;
     }
 
-    .glass {
-      background: rgba(255,255,255,0.065);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.2);
-      backdrop-filter: blur(18px);
-    }
-
-    .about-card {
+    .about-grid {
       display: grid;
-      grid-template-columns: 0.9fr 1.1fr;
-      gap: 30px;
-      padding: 34px;
-    }
-
-    .quote {
-      padding: 30px;
-      border-radius: 24px;
-      background:
-        linear-gradient(135deg, rgba(91,140,255,0.18), rgba(155,92,255,0.16)),
-        rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.12);
-    }
-
-    .quote p {
-      margin: 0;
-      font-size: 25px;
-      line-height: 1.55;
-      letter-spacing: -0.5px;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 40px;
+      align-items: start;
     }
 
     .about-text p {
-      margin-top: 0;
-      color: var(--muted);
+      margin: 0 0 18px;
+      color: var(--text-sub);
+      font-size: 16px;
     }
 
-    .about-text strong {
-      color: white;
+    .about-quote {
+      padding: 28px;
+      background: rgba(255,255,255,0.55);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      font-size: 24px;
+      line-height: 1.6;
+      color: var(--text-main);
     }
 
     .strength-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 18px;
-      margin-top: 26px;
     }
 
     .strength-card {
-      padding: 24px;
-      border-radius: 24px;
-      background: rgba(255,255,255,0.065);
+      background: rgba(255,255,255,0.55);
       border: 1px solid var(--line);
-      min-height: 230px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .strength-card::after {
-      content: "";
-      position: absolute;
-      width: 90px;
-      height: 90px;
-      right: -32px;
-      top: -32px;
-      border-radius: 50%;
-      background: rgba(91,140,255,0.18);
-      filter: blur(4px);
-    }
-
-    .strength-num {
-      color: var(--cyan);
-      font-weight: 800;
-      font-size: 13px;
-      margin-bottom: 16px;
+      border-radius: var(--radius);
+      padding: 24px;
     }
 
     .strength-card h3 {
-      margin: 0 0 12px;
+      margin: 0 0 10px;
       font-size: 20px;
-      line-height: 1.35;
     }
 
     .strength-card p {
-      color: var(--muted);
       margin: 0;
-      font-size: 14px;
+      color: var(--text-sub);
+      font-size: 15px;
     }
 
     .project-list {
@@ -495,446 +265,317 @@
     }
 
     .project-card {
-      position: relative;
       display: grid;
-      grid-template-columns: 230px 1fr;
+      grid-template-columns: 220px 1fr;
       gap: 28px;
-      padding: 30px;
-      overflow: hidden;
-    }
-
-    .project-card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(circle at 8% 20%, rgba(91,140,255,0.16), transparent 26%),
-        radial-gradient(circle at 88% 75%, rgba(155,92,255,0.13), transparent 28%);
-      pointer-events: none;
-    }
-
-    .project-index {
-      position: relative;
-      min-height: 220px;
+      background: rgba(255,255,255,0.58);
+      border: 1px solid var(--line);
       border-radius: 22px;
-      border: 1px solid rgba(255,255,255,0.11);
-      background:
-        linear-gradient(145deg, rgba(91,140,255,0.18), rgba(155,92,255,0.12)),
-        rgba(255,255,255,0.05);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 22px;
+      padding: 26px;
     }
 
-    .project-index .number {
-      font-size: 54px;
-      font-weight: 900;
-      line-height: 1;
-      letter-spacing: -3px;
-      color: rgba(255,255,255,0.92);
+    .project-side {
+      border-right: 1px solid var(--line);
+      padding-right: 20px;
     }
 
-    .project-index .type {
-      color: var(--cyan);
-      font-weight: 800;
-      font-size: 13px;
-      letter-spacing: 1px;
-    }
-
-    .project-body {
-      position: relative;
-    }
-
-    .project-body h3 {
-      margin: 0;
-      font-size: clamp(24px, 3vw, 34px);
-      letter-spacing: -0.8px;
-      line-height: 1.25;
-    }
-
-    .project-desc {
-      color: var(--muted);
-      margin: 16px 0 20px;
-    }
-
-    .chip-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 9px;
-      margin: 20px 0 24px;
-    }
-
-    .chip {
-      padding: 6px 10px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.075);
-      border: 1px solid rgba(255,255,255,0.1);
-      color: #dbe6ff;
-      font-size: 13px;
-    }
-
-    .project-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .doc-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 11px 15px;
-      border-radius: 13px;
-      background: rgba(91, 140, 255, 0.16);
-      color: #dbe8ff;
-      border: 1px solid rgba(91, 140, 255, 0.4);
+    .project-num {
+      font-size: 44px;
       font-weight: 700;
-      transition: 0.2s ease;
+      color: var(--accent-dark);
+      line-height: 1;
+      margin-bottom: 10px;
     }
 
-    .doc-btn:hover {
-      background: rgba(91, 140, 255, 0.26);
-      transform: translateY(-2px);
+    .project-type {
+      font-size: 14px;
+      color: var(--text-sub);
     }
 
-    .matrix {
+    .project-main h3 {
+      margin: 0 0 14px;
+      font-size: 28px;
+      line-height: 1.35;
+    }
+
+    .project-main p {
+      margin: 0 0 18px;
+      color: var(--text-sub);
+      font-size: 15px;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .tag {
+      font-size: 13px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: #f4eee8;
+      color: var(--accent-dark);
+      border: 1px solid #dfd2c7;
+    }
+
+    .doc-link {
+      display: inline-block;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .doc-link:hover {
+      background: var(--accent-dark);
+    }
+
+    .ability-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 18px;
     }
 
-    .matrix-card {
-      padding: 24px;
-      min-height: 210px;
+    .ability-card {
+      background: rgba(255,255,255,0.55);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 22px;
     }
 
-    .matrix-card h3 {
-      margin: 0 0 16px;
-      color: white;
-      font-size: 21px;
+    .ability-card h3 {
+      margin: 0 0 12px;
+      font-size: 18px;
     }
 
-    .matrix-card ul {
-      list-style: none;
-      padding: 0;
+    .ability-card ul {
       margin: 0;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .matrix-card li {
-      padding: 8px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .matrix-card li:last-child {
-      border-bottom: none;
+      padding-left: 18px;
+      color: var(--text-sub);
+      font-size: 15px;
     }
 
     .experience-grid {
       display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
+      grid-template-columns: 1fr 1fr;
       gap: 22px;
     }
 
-    .timeline {
-      padding: 30px;
+    .panel {
+      background: rgba(255,255,255,0.55);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 26px;
     }
 
-    .timeline-item {
-      position: relative;
-      padding-left: 24px;
-      padding-bottom: 28px;
-      border-left: 1px solid rgba(255,255,255,0.15);
-    }
-
-    .timeline-item:last-child {
-      padding-bottom: 0;
-    }
-
-    .timeline-item::before {
-      content: "";
-      position: absolute;
-      left: -6px;
-      top: 6px;
-      width: 11px;
-      height: 11px;
-      border-radius: 50%;
-      background: var(--cyan);
-      box-shadow: 0 0 18px var(--cyan);
-    }
-
-    .timeline-item h3 {
-      margin: 0;
-      font-size: 20px;
-    }
-
-    .timeline-time {
-      margin: 6px 0 10px;
-      color: var(--muted-2);
-      font-size: 14px;
-    }
-
-    .timeline-item p {
-      margin: 0;
-      color: var(--muted);
-    }
-
-    .skills-box {
-      padding: 30px;
-    }
-
-    .skills-box h3 {
-      margin: 0 0 18px;
+    .panel h3 {
+      margin: 0 0 16px;
       font-size: 22px;
     }
 
-    .skill-cloud {
+    .edu-item {
+      padding-bottom: 18px;
+      margin-bottom: 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .edu-item:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    .edu-item h4 {
+      margin: 0 0 6px;
+      font-size: 18px;
+    }
+
+    .edu-time {
+      font-size: 14px;
+      color: var(--text-sub);
+      margin-bottom: 8px;
+    }
+
+    .edu-item p,
+    .panel p {
+      margin: 0;
+      color: var(--text-sub);
+      font-size: 15px;
+    }
+
+    .skill-list {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
     }
 
-    .skill {
-      padding: 9px 12px;
-      border-radius: 12px;
-      background: rgba(255,255,255,0.075);
-      border: 1px solid rgba(255,255,255,0.1);
-      color: #e4ebff;
+    .skill-list span {
+      display: inline-block;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: #f4eee8;
+      border: 1px solid #dfd2c7;
+      color: var(--accent-dark);
       font-size: 14px;
     }
 
-    .contact {
-      padding: 42px;
-      border-radius: 34px;
-      background:
-        radial-gradient(circle at 10% 20%, rgba(35,211,238,0.2), transparent 30%),
-        radial-gradient(circle at 90% 20%, rgba(155,92,255,0.2), transparent 30%),
-        rgba(255,255,255,0.075);
-      border: 1px solid var(--line);
-      box-shadow: var(--shadow);
+    .contact-box {
       text-align: center;
+      background: rgba(255,255,255,0.6);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 42px 24px;
     }
 
-    .contact h2 {
+    .contact-box h2 {
       margin: 0;
-      font-size: clamp(30px, 4vw, 48px);
-      letter-spacing: -1.5px;
+      font-size: 34px;
     }
 
-    .contact p {
-      color: var(--muted);
-      max-width: 620px;
-      margin: 18px auto 0;
+    .contact-box p {
+      max-width: 700px;
+      margin: 14px auto 0;
+      color: var(--text-sub);
+      font-size: 16px;
     }
 
-    .contact-links {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 14px;
-      margin-top: 30px;
+    .contact-actions {
+      margin-top: 24px;
+    }
+
+    .mail-btn {
+      display: inline-block;
+      padding: 12px 22px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 600;
     }
 
     footer {
-      padding: 30px 0 52px;
-      color: var(--muted-2);
+      padding: 24px 0 42px;
       text-align: center;
+      color: var(--text-sub);
       font-size: 14px;
+      background: var(--bg-main);
     }
 
     @media (max-width: 980px) {
-      .hero {
-        grid-template-columns: 1fr;
-        padding-top: 54px;
-      }
-
-      .hero-panel {
-        min-height: auto;
-      }
-
-      .floating-note {
-        position: static;
-        margin-top: 16px;
-        width: auto;
-      }
-
-      .about-card,
+      .about-grid,
       .project-card,
       .experience-grid {
         grid-template-columns: 1fr;
       }
 
-      .strength-grid,
-      .matrix {
-        grid-template-columns: repeat(2, 1fr);
+      .project-side {
+        border-right: none;
+        border-bottom: 1px solid var(--line);
+        padding-right: 0;
+        padding-bottom: 16px;
       }
 
-      .section-head {
-        align-items: flex-start;
-        flex-direction: column;
+      .strength-grid,
+      .ability-grid {
+        grid-template-columns: 1fr 1fr;
       }
     }
 
     @media (max-width: 720px) {
-      .page,
-      .nav-inner {
-        width: min(100% - 28px, 1180px);
-      }
-
       .nav-inner {
         height: auto;
         padding: 14px 0;
+        flex-direction: column;
         align-items: flex-start;
       }
 
       .nav-links {
-        display: none;
+        flex-wrap: wrap;
+        gap: 14px;
       }
 
-      .hero h1 {
-        letter-spacing: -2px;
+      .hero {
+        min-height: 78vh;
       }
 
-      section {
-        padding: 54px 0;
+      .hero-content {
+        padding-bottom: 46px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+      .section {
+        padding: 64px 0;
       }
 
       .strength-grid,
-      .matrix,
-      .metric-grid {
+      .ability-grid {
         grid-template-columns: 1fr;
       }
 
-      .about-card,
-      .project-card,
-      .contact {
-        padding: 22px;
+      .about-quote {
+        font-size: 20px;
       }
 
-      .project-index {
-        min-height: 160px;
+      .project-main h3 {
+        font-size: 24px;
       }
     }
   </style>
 </head>
-
 <body>
-  <nav class="nav">
-    <div class="nav-inner">
-      <a class="brand" href="#home" aria-label="返回首页">
-        <span class="brand-mark">Y</span>
-        <span>颜墨涵｜游戏策划作品集</span>
-      </a>
 
+  <nav class="nav">
+    <div class="container nav-inner">
+      <div class="brand">
+        颜墨涵
+        <small>游戏策划作品集</small>
+      </div>
       <div class="nav-links">
         <a href="#about">关于我</a>
         <a href="#strength">优势</a>
         <a href="#projects">作品集</a>
         <a href="#abilities">能力</a>
         <a href="#experience">经历</a>
-        <a class="nav-cta" href="#contact">联系我</a>
+        <a href="#contact">联系我</a>
       </div>
     </div>
   </nav>
 
-  <header id="home" class="page hero">
-    <div>
-      <div class="eyebrow">
-        <span class="dot"></span>
-        游戏策划作品集档案 / 2026
-      </div>
-
-      <h1>
-        <span class="gradient-text">从玩家体验，</span><br />
-        到系统设计
-      </h1>
-
-      <p class="hero-subtitle">
-        我关注的不只是<strong>“好不好玩”</strong>，而是一个系统为什么这样设计：
+  <header class="hero">
+    <div class="hero-content">
+      <div class="hero-tag">游戏策划作品集档案</div>
+      <h1>从玩家体验，<br>到系统设计</h1>
+      <p>
+        我关注的不只是“好不好玩”，而是一个系统为什么这样设计：
         它如何引导玩家、制造目标、分配资源，并形成长期体验。
       </p>
-
-      <div class="hero-tags">
-        <span class="tag">系统拆解</span>
-        <span class="tag">玩法设计</span>
-        <span class="tag">战斗分析</span>
-        <span class="tag">策划文档</span>
-      </div>
-
-      <div class="hero-actions">
-        <a class="btn btn-primary" href="#projects">查看作品集 →</a>
-        <a class="btn btn-ghost" href="#contact">联系我</a>
-      </div>
-    </div>
-
-    <div class="hero-panel">
-      <div class="orbit-card">
-        <div class="archive-top">
-          <div class="status">
-            <span></span><span></span><span></span>
-          </div>
-          <span>DESIGN ARCHIVE</span>
-        </div>
-
-        <h2 class="profile-name">颜墨涵</h2>
-        <div class="profile-role">游戏策划方向学习者</div>
-
-        <p class="profile-desc">
-          具备计算机背景，正在通过系统拆解与原创策划案训练策划表达能力。
-          目前关注战斗系统、角色养成、长期玩法与玩家行为引导。
-        </p>
-
-        <div class="metric-grid">
-          <div class="metric">
-            <strong>03</strong>
-            <span>作品集文档</span>
-          </div>
-          <div class="metric">
-            <strong>系统</strong>
-            <span>拆解与设计</span>
-          </div>
-          <div class="metric">
-            <strong>ARPG</strong>
-            <span>战斗分析方向</span>
-          </div>
-          <div class="metric">
-            <strong>长期</strong>
-            <span>玩法设计意识</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="floating-note">
-        <b>作品集重点：</b><br />
-        展示“我如何理解一个游戏系统”，而不是简单罗列“我玩过什么”。
+      <div class="hero-buttons">
+        <a class="btn btn-primary" href="#projects">查看作品集</a>
+        <a class="btn btn-secondary" href="#contact">联系我</a>
       </div>
     </div>
   </header>
 
-  <main>
-    <section id="about" class="page">
+  <section id="about" class="section section-light">
+    <div class="container">
       <div class="section-head">
-        <div>
-          <div class="section-kicker">PROFILE</div>
-          <h2 class="section-title">关于我</h2>
+        <div class="section-kicker">About</div>
+        <h2 class="section-title">关于我</h2>
+        <div class="section-desc">
+          我希望自己的作品集不是展示“我玩过什么”，而是展示“我如何理解一个游戏系统”。
         </div>
-        <p class="section-note">
-          我正在从玩家视角转向策划视角，用拆解与设计建立自己的策划方法。
-        </p>
       </div>
 
-      <div class="about-card glass">
-        <div class="quote">
-          <p>
-            我希望自己的作品集不是展示“我玩过什么”，而是展示“我如何理解一个游戏系统”。
-          </p>
-        </div>
-
+      <div class="about-grid">
         <div class="about-text">
           <p>
-            我是<strong>颜墨涵</strong>，本科阶段学习计算机科学与技术，研究生阶段方向为教育技术学。
+            我是颜墨涵，本科阶段学习计算机科学与技术，研究生阶段方向为教育技术学。
           </p>
           <p>
             计算机背景让我更容易理解系统结构、规则逻辑与功能流程；教育技术背景让我关注用户学习路径、体验引导与反馈机制。
@@ -943,20 +584,24 @@
             我正在从“玩家视角”转向“策划视角”：不只描述一个玩法是否有趣，而是尝试分析它为什么成立、服务什么目标、如何影响玩家行为，以及如何支撑长期运营。
           </p>
         </div>
-      </div>
-    </section>
 
-    <section id="strength" class="page">
-      <div class="section-head">
-        <div>
-          <div class="section-kicker">CORE STRENGTHS</div>
-          <h2 class="section-title">核心优势</h2>
+        <div class="about-quote">
+          我希望自己的作品集不是展示“我玩过什么”，<br>
+          而是展示“我如何理解一个游戏系统”。
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="strength" class="section section-soft">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-kicker">Strengths</div>
+        <h2 class="section-title">核心优势</h2>
       </div>
 
       <div class="strength-grid">
         <div class="strength-card">
-          <div class="strength-num">01</div>
           <h3>系统化拆解能力</h3>
           <p>
             能够将复杂游戏系统拆分为设计目标、系统入口、玩法流程、资源循环、玩家历程、功能规则与界面交互等模块，避免停留在主观体验评价。
@@ -964,7 +609,6 @@
         </div>
 
         <div class="strength-card">
-          <div class="strength-num">02</div>
           <h3>战斗系统理解能力</h3>
           <p>
             能够从战斗资源、角色性能、技能体系、操作节奏与表现演出等角度拆解 ARPG 战斗系统，理解机制、反馈与视听表现之间的关系。
@@ -972,7 +616,6 @@
         </div>
 
         <div class="strength-card">
-          <div class="strength-num">03</div>
           <h3>长期玩法设计意识</h3>
           <p>
             能够从玩家长期目标、资源产出、协作关系和内容消耗角度思考玩法系统，而不仅关注单次游玩体验。
@@ -980,248 +623,207 @@
         </div>
 
         <div class="strength-card">
-          <div class="strength-num">04</div>
           <h3>规则与文档表达能力</h3>
           <p>
             能够将设计想法继续拆解为开启条件、创建规则、加入流程、退出限制、升级规则、界面字段、按钮反馈与资源配置等可执行内容。
           </p>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="projects" class="page">
+  <section id="projects" class="section section-light">
+    <div class="container">
       <div class="section-head">
-        <div>
-          <div class="section-kicker">PORTFOLIO</div>
-          <h2 class="section-title">作品集档案</h2>
+        <div class="section-kicker">Portfolio</div>
+        <h2 class="section-title">作品集</h2>
+        <div class="section-desc">
+          当前作品主要围绕《绝区零》展开，从已有系统拆解到原创玩法设计，展示我的策划学习路径。
         </div>
-        <p class="section-note">
-          当前作品集主要围绕《绝区零》展开，从已有系统拆解到原创玩法设计，展示我的策划学习路径。
-        </p>
       </div>
 
       <div class="project-list">
-        <article class="project-card glass">
-          <div class="project-index">
-            <div class="number">01</div>
-            <div>
-              <div class="type">战斗系统拆解</div>
-              <div>Combat Analysis</div>
-            </div>
-          </div>
 
-          <div class="project-body">
+        <div class="project-card">
+          <div class="project-side">
+            <div class="project-num">01</div>
+            <div class="project-type">战斗系统拆解</div>
+          </div>
+          <div class="project-main">
             <h3>《绝区零》战斗系统拆解案</h3>
-            <p class="project-desc">
+            <p>
               围绕《绝区零》的战斗系统进行拆解，分析其战斗核心特色、主界面信息布局、快速轮切机制、角色性能参数、技能体系、资源博弈、攻击规则与表现演出。
-              <br /><br />
-              该文档重点关注战斗系统如何通过失衡值、异常值、支援点、能量、喧响值等资源构建策略选择；如何通过轮切、支援、QTE、极限闪避等机制形成多角色联动体验；以及如何通过镜头、音效、动画和受击反馈强化打击感。
             </p>
-
-            <div class="chip-row">
-              <span class="chip">战斗系统</span>
-              <span class="chip">ARPG</span>
-              <span class="chip">资源机制</span>
-              <span class="chip">角色性能</span>
-              <span class="chip">技能体系</span>
-              <span class="chip">表现反馈</span>
+            <div class="tags">
+              <span class="tag">战斗系统</span>
+              <span class="tag">ARPG</span>
+              <span class="tag">资源机制</span>
+              <span class="tag">角色性能</span>
+              <span class="tag">技能体系</span>
             </div>
-
-            <div class="project-actions">
-              <a class="doc-btn" href="绝区零（Zenless Zone Zero）战斗系统拆解案.pdf" target="_blank">打开项目文档 →</a>
-            </div>
+            <a class="doc-link" href="绝区零（Zenless Zone Zero）战斗系统拆解案.pdf" target="_blank">打开项目文档</a>
           </div>
-        </article>
-
-        <article class="project-card glass">
-          <div class="project-index">
-            <div class="number">02</div>
-            <div>
-              <div class="type">角色系统反拆</div>
-              <div>System Reverse Analysis</div>
-            </div>
-          </div>
-
-          <div class="project-body">
-            <h3>《绝区零》角色系统反拆案</h3>
-            <p class="project-desc">
-              围绕《绝区零》的角色系统展开分析，拆解角色系统如何承担玩家情感锚定、付费转化、养成验证、成长可视化与核心玩法连接等功能。
-              <br /><br />
-              文档包含系统框架、设计目的、系统入口、玩法流程、玩法循环、玩家历程与养成系统分析，重点关注角色获取、角色养成、战斗验证和资源奖励如何形成长期循环。
-            </p>
-
-            <div class="chip-row">
-              <span class="chip">角色系统</span>
-              <span class="chip">养成系统</span>
-              <span class="chip">玩家历程</span>
-              <span class="chip">商业化</span>
-              <span class="chip">长期循环</span>
-            </div>
-
-            <div class="project-actions">
-              <a class="doc-btn" href="绝区零（Zenless Zone Zero）角色系统反拆案.pdf" target="_blank">打开项目文档 →</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="project-card glass">
-          <div class="project-index">
-            <div class="number">03</div>
-            <div>
-              <div class="type">原创玩法策划</div>
-              <div>Gameplay Proposal</div>
-            </div>
-          </div>
-
-          <div class="project-body">
-            <h3>《绝区零》绳结域策划案</h3>
-            <p class="project-desc">
-              基于《绝区零》的“绳网”设定，设计一个偏家园 / 公会 / 社区协作方向的长期玩法系统“绳结域”。
-              <br /><br />
-              方案目标是补足当前游戏中社区互动不足、资源获取方式较单一、玩法偏硬核的问题。系统通过绳结域创建与加入、成员职位、等级成长、科技发展、强敌讨伐、积分商店等功能，构建玩家之间的长期协作目标。
-              <br /><br />
-              文档进一步细化了功能规则、开启条件、创建与加入流程、退出规则、升级流程、界面交互、按钮反馈和资源配置需求。
-            </p>
-
-            <div class="chip-row">
-              <span class="chip">原创策划</span>
-              <span class="chip">公会系统</span>
-              <span class="chip">长期玩法</span>
-              <span class="chip">社区协作</span>
-              <span class="chip">功能规则</span>
-              <span class="chip">界面交互</span>
-            </div>
-
-            <div class="project-actions">
-              <a class="doc-btn" href="绝区零（Zenless Zone Zero）绳结域策划案.pdf" target="_blank">打开项目文档 →</a>
-            </div>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section id="abilities" class="page">
-      <div class="section-head">
-        <div>
-          <div class="section-kicker">ABILITY MATRIX</div>
-          <h2 class="section-title">我能做什么</h2>
         </div>
+
+        <div class="project-card">
+          <div class="project-side">
+            <div class="project-num">02</div>
+            <div class="project-type">角色系统反拆</div>
+          </div>
+          <div class="project-main">
+            <h3>《绝区零》角色系统反拆案</h3>
+            <p>
+              围绕《绝区零》的角色系统展开分析，拆解角色系统如何承担玩家情感锚定、付费转化、养成验证、成长可视化与核心玩法连接等功能。
+            </p>
+            <div class="tags">
+              <span class="tag">角色系统</span>
+              <span class="tag">养成系统</span>
+              <span class="tag">玩家历程</span>
+              <span class="tag">长期循环</span>
+            </div>
+            <a class="doc-link" href="绝区零（Zenless Zone Zero）角色系统反拆案.pdf" target="_blank">打开项目文档</a>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-side">
+            <div class="project-num">03</div>
+            <div class="project-type">原创玩法策划</div>
+          </div>
+          <div class="project-main">
+            <h3>《绝区零》绳结域策划案</h3>
+            <p>
+              基于《绝区零》的“绳网”设定，设计一个偏家园 / 公会 / 社区协作方向的长期玩法系统“绳结域”，重点关注长期目标、资源获取、成员协作与功能规则设计。
+            </p>
+            <div class="tags">
+              <span class="tag">原创策划</span>
+              <span class="tag">长期玩法</span>
+              <span class="tag">社区协作</span>
+              <span class="tag">界面交互</span>
+            </div>
+            <a class="doc-link" href="绝区零（Zenless Zone Zero）绳结域策划案.pdf" target="_blank">打开项目文档</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="abilities" class="section section-soft">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-kicker">Abilities</div>
+        <h2 class="section-title">我能做什么</h2>
       </div>
 
-      <div class="matrix">
-        <div class="matrix-card glass">
+      <div class="ability-grid">
+        <div class="ability-card">
           <h3>系统拆解</h3>
           <ul>
             <li>设计目标分析</li>
             <li>系统入口梳理</li>
             <li>玩法流程拆解</li>
             <li>资源循环分析</li>
-            <li>玩家行为理解</li>
           </ul>
         </div>
 
-        <div class="matrix-card glass">
+        <div class="ability-card">
           <h3>战斗分析</h3>
           <ul>
             <li>角色性能分析</li>
             <li>技能结构拆解</li>
             <li>操作节奏理解</li>
-            <li>资源博弈分析</li>
             <li>表现反馈观察</li>
           </ul>
         </div>
 
-        <div class="matrix-card glass">
+        <div class="ability-card">
           <h3>玩法策划</h3>
           <ul>
             <li>长期目标设计</li>
             <li>协作玩法构思</li>
-            <li>奖励结构设计</li>
-            <li>功能规则拆分</li>
+            <li>功能规则设计</li>
             <li>活动结构规划</li>
           </ul>
         </div>
 
-        <div class="matrix-card glass">
+        <div class="ability-card">
           <h3>文档表达</h3>
           <ul>
             <li>流程图</li>
             <li>脑图</li>
             <li>表格</li>
             <li>界面标注</li>
-            <li>配置说明</li>
           </ul>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="experience" class="page">
+  <section id="experience" class="section section-deep">
+    <div class="container">
       <div class="section-head">
-        <div>
-          <div class="section-kicker">EXPERIENCE</div>
-          <h2 class="section-title">经历与技能</h2>
-        </div>
+        <div class="section-kicker">Experience</div>
+        <h2 class="section-title">经历与技能</h2>
       </div>
 
       <div class="experience-grid">
-        <div class="timeline glass">
-          <div class="timeline-item">
-            <h3>浙江工业大学｜教育技术学（理学）硕士</h3>
-            <div class="timeline-time">2025.09 - 2028.06</div>
-            <p>
-              关注用户学习路径、体验引导与反馈机制。曾获“AI + 人工素养大赛”校赛一等奖。
-            </p>
+        <div class="panel">
+          <h3>教育经历</h3>
+
+          <div class="edu-item">
+            <h4>浙江工业大学｜教育技术学（理学）硕士</h4>
+            <div class="edu-time">2025.09 - 2028.06</div>
+            <p>关注用户学习路径、体验引导与反馈机制。</p>
           </div>
 
-          <div class="timeline-item">
-            <h3>浙江工业大学｜计算机科学与技术 本科</h3>
-            <div class="timeline-time">2021.09 - 2025.06</div>
+          <div class="edu-item">
+            <h4>浙江工业大学｜计算机科学与技术 本科</h4>
+            <div class="edu-time">2021.09 - 2025.06</div>
             <p>
-              GPA 3.6 / 5.0，专业排名前 15%。主修课程包括程序设计基础 C、计算机网络原理、软件工程、操作系统原理、计算机组成原理等。
+              GPA 3.6 / 5.0，专业排名前 15%。主修课程包括程序设计基础 C、计算机网络原理、软件工程、操作系统原理、计算机组成原理。
             </p>
           </div>
         </div>
 
-        <div class="skills-box glass">
+        <div class="panel">
           <h3>技能与工具</h3>
-          <div class="skill-cloud">
-            <span class="skill">Unity（持续学习）</span>
-            <span class="skill">C#（持续学习）</span>
-            <span class="skill">墨刀</span>
-            <span class="skill">XMind</span>
-            <span class="skill">系统拆解</span>
-            <span class="skill">策划案写作</span>
-            <span class="skill">流程图绘制</span>
-            <span class="skill">界面交互说明</span>
-            <span class="skill">游戏系统分析</span>
-            <span class="skill">活动设计分析</span>
+          <div class="skill-list">
+            <span>Unity（持续学习）</span>
+            <span>C#（持续学习）</span>
+            <span>墨刀</span>
+            <span>XMind</span>
+            <span>系统拆解</span>
+            <span>策划案写作</span>
+            <span>流程图绘制</span>
+            <span>界面交互说明</span>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="contact" class="page">
-      <div class="contact">
-        <div class="section-kicker">CONTACT</div>
+  <section id="contact" class="section section-light">
+    <div class="container">
+      <div class="contact-box">
         <h2>欢迎交流作品集与游戏策划方向</h2>
         <p>
           如果你对我的作品集、系统拆解内容或游戏策划学习经历感兴趣，欢迎通过邮箱联系我。
         </p>
-
-        <div class="contact-links">
-          <a class="btn btn-primary" href="mailto:17316160@qq.com">发送邮件</a>
+        <div class="contact-actions">
+          <a class="mail-btn" href="mailto:17316160@qq.com">发送邮件</a>
         </div>
-
         <p>
-          邮箱：17316160@qq.com<br />
+          邮箱：17316160@qq.com<br>
           方向：游戏策划 / 系统策划 / 玩法策划
         </p>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
 
-  <footer class="page">
-    © 2026 颜墨涵. Built with GitHub Pages.
+  <footer>
+    © 2026 颜墨涵｜GitHub Pages
   </footer>
+
 </body>
 </html>
