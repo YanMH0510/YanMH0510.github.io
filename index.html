@@ -1,11 +1,378 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <title>我的个人主页</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>颜墨涵 | 游戏策划作品集</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+      background: #f5f7fb;
+      color: #1f2937;
+      line-height: 1.7;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .hero {
+      min-height: 420px;
+      padding: 80px 24px;
+      background: linear-gradient(135deg, #1e3a8a, #2563eb, #7c3aed);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .hero-content {
+      max-width: 900px;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 6px 14px;
+      margin-bottom: 20px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.18);
+      font-size: 14px;
+      letter-spacing: 1px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 52px;
+      letter-spacing: 2px;
+    }
+
+    .subtitle {
+      margin-top: 18px;
+      font-size: 22px;
+      opacity: 0.95;
+    }
+
+    .intro {
+      margin: 24px auto 0;
+      max-width: 720px;
+      font-size: 17px;
+      opacity: 0.95;
+    }
+
+    .buttons {
+      margin-top: 34px;
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .button {
+      padding: 12px 22px;
+      border-radius: 999px;
+      font-weight: 600;
+      background: white;
+      color: #1e3a8a;
+      transition: 0.2s;
+    }
+
+    .button.secondary {
+      background: rgba(255,255,255,0.14);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.5);
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+    }
+
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 56px 24px;
+    }
+
+    .section-title {
+      font-size: 30px;
+      margin-bottom: 24px;
+      color: #111827;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 22px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 22px;
+      padding: 26px;
+      box-shadow: 0 10px 30px rgba(15,23,42,0.08);
+      border: 1px solid #e5e7eb;
+    }
+
+    .card h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      color: #1e3a8a;
+      font-size: 21px;
+    }
+
+    .card p {
+      margin: 8px 0;
+      color: #4b5563;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 18px;
+    }
+
+    .timeline-item {
+      background: white;
+      border-left: 5px solid #2563eb;
+      padding: 22px 26px;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(15,23,42,0.07);
+    }
+
+    .timeline-item h3 {
+      margin: 0;
+      color: #111827;
+    }
+
+    .time {
+      color: #6b7280;
+      font-size: 14px;
+      margin-top: 4px;
+    }
+
+    .portfolio-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 220px;
+    }
+
+    .portfolio-type {
+      display: inline-block;
+      width: fit-content;
+      margin-bottom: 12px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #eff6ff;
+      color: #1d4ed8;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .pdf-link {
+      margin-top: 18px;
+      display: inline-block;
+      padding: 10px 16px;
+      border-radius: 12px;
+      background: #2563eb;
+      color: white;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .pdf-link:hover {
+      background: #1d4ed8;
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .skill {
+      padding: 8px 14px;
+      background: #eef2ff;
+      color: #3730a3;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .contact {
+      background: #111827;
+      color: white;
+      text-align: center;
+      padding: 54px 24px;
+    }
+
+    .contact h2 {
+      margin-top: 0;
+      font-size: 30px;
+    }
+
+    .contact p {
+      color: #d1d5db;
+    }
+
+    .footer {
+      padding: 22px;
+      text-align: center;
+      color: #6b7280;
+      font-size: 14px;
+    }
+
+    @media (max-width: 640px) {
+      h1 {
+        font-size: 38px;
+      }
+
+      .subtitle {
+        font-size: 18px;
+      }
+
+      .hero {
+        padding: 60px 20px;
+      }
+    }
+  </style>
 </head>
+
 <body>
-  <h1>你好，我是 Yan Mohan</h1>
-  <p>这是我的个人网页。</p>
+  <section class="hero">
+    <div class="hero-content">
+      <div class="tag">Game Designer Portfolio</div>
+      <h1>颜墨涵</h1>
+      <div class="subtitle">游戏策划方向学习者 / 系统拆解与内容设计</div>
+      <p class="intro">
+        我正在从玩家视角转向策划视角，关注游戏系统结构、长线运营活动设计、玩法体验与玩家动机。
+        希望通过持续的拆解、设计与表达，积累成为游戏策划所需的分析能力与方案能力。
+      </p>
+
+      <div class="buttons">
+        <a class="button" href="#portfolio">查看作品集</a>
+        <a class="button secondary" href="#contact">联系我</a>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <section class="container">
+      <h2 class="section-title">关于我</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>策划方向</h3>
+          <p>
+            关注 RPG、长线运营游戏、系统结构与活动设计。会尝试从目标用户、玩法循环、资源投放、
+            剧情衔接和体验节奏等角度理解游戏内容。
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>学习背景</h3>
+          <p>
+            本科为计算机科学与技术，具备程序设计、软件工程、操作系统、计算机网络等基础。
+            研究生阶段方向为教育技术学。
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>能力特点</h3>
+          <p>
+            有团队协作与活动策划经验，正在系统学习游戏策划相关知识，并持续练习策划案与系统拆解案写作。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="container">
+      <h2 class="section-title">教育经历</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <h3>浙江工业大学 · 教育技术学（理学）硕士</h3>
+          <div class="time">2025.09 - 2028.06</div>
+          <p>荣誉奖项：“AI + 人工素养大赛”校赛一等奖</p>
+        </div>
+
+        <div class="timeline-item">
+          <h3>浙江工业大学 · 计算机科学与技术 本科</h3>
+          <div class="time">2021.09 - 2025.06</div>
+          <p>GPA 3.6 / 5.0，专业排名前 15%。主修课程包括 C 语言、软件工程、操作系统、计算机网络、计算机组成原理等。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="container">
+      <h2 class="section-title">技能与工具</h2>
+      <div class="card">
+        <div class="skills">
+          <span class="skill">Unity</span>
+          <span class="skill">C# 学习中</span>
+          <span class="skill">墨刀</span>
+          <span class="skill">XMind</span>
+          <span class="skill">系统拆解</span>
+          <span class="skill">策划案写作</span>
+          <span class="skill">活动设计分析</span>
+          <span class="skill">玩家体验分析</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="portfolio" class="container">
+      <h2 class="section-title">作品集</h2>
+
+      <div class="grid">
+        <div class="card portfolio-card">
+          <div>
+            <span class="portfolio-type">策划案</span>
+            <h3>游戏策划案</h3>
+            <p>
+              展示玩法设计、核心循环、系统结构、目标用户与体验目标等内容。
+            </p>
+          </div>
+          <a class="pdf-link" href="portfolio/game-design-plan.pdf" target="_blank">查看 PDF</a>
+        </div>
+
+        <div class="card portfolio-card">
+          <div>
+            <span class="portfolio-type">系统拆解</span>
+            <h3>系统拆解案 01</h3>
+            <p>
+              对游戏系统的入口、规则、成长路径、资源消耗与设计目的进行整理分析。
+            </p>
+          </div>
+          <a class="pdf-link" href="portfolio/system-analysis-01.pdf" target="_blank">查看 PDF</a>
+        </div>
+
+        <div class="card portfolio-card">
+          <div>
+            <span class="portfolio-type">系统拆解</span>
+            <h3>系统拆解案 02</h3>
+            <p>
+              从玩家体验与系统目标角度拆解游戏机制，梳理设计逻辑与可借鉴点。
+            </p>
+          </div>
+          <a class="pdf-link" href="portfolio/system-analysis-02.pdf" target="_blank">查看 PDF</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
+      <h2>联系我</h2>
+      <p>如果你对我的作品集或游戏策划方向经历感兴趣，欢迎联系我。</p>
+      <p>邮箱：17316160@qq.com</p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    © 2026 颜墨涵. Powered by GitHub Pages.
+  </footer>
 </body>
 </html>
